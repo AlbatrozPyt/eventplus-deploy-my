@@ -40,13 +40,13 @@ export const institutionResource = '/Instituicao';
  */
 export const loginResource = '/Login';
 
-const apiPort = '5000';
-const localApiUri = `http://localhost:${apiPort}/api`;
-const externallApiUri = ``;
+// const apiPort = '5000';
+// const localApiUri = `http://localhost:${apiPort}/api`;
+const externallApiUri = `https://eventplus-matheusenrike.azurewebsites.net/api`;
 // const externalApiUri = null;
 
 const api = axios.create({
-    baseURL: localApiUri
+    baseURL: externallApiUri
 });
 
 
