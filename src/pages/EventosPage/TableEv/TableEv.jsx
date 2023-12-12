@@ -3,7 +3,10 @@ import "./TableEv.css";
 // import editPen from "../../../assets/images/edit-pen.svg";
 import editPen from "../../../assets/images/edit-pen.svg";
 import trashDelete from "../../../assets/images/trash-delete.svg";
+import viewDetails from "../../../assets/images/olhinho.png";
 import { dateFormateDbToView } from "../../../Utils/stringFunctions";
+
+import { Link } from "react-router-dom";
 
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
@@ -29,6 +32,9 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
           <th className="table-data__head-title table-data__head-title--big">
             Data
           </th>
+          <th className="table-data__head-title table-data__head-title--big">
+            Ver
+          </th>
           <th className="table-data__head-title table-data__head-title--little">
             Editar
           </th>
@@ -51,16 +57,22 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
                 data-tooltip-place="top"
               >
                 {tp.descricao.substr(0, 15)} ...
-                <Tooltip
-                  id="description-tooltip"
-                  className="custom-tootip"
-                />
+                <Tooltip id="description-tooltip" className="custom-tootip" />
               </td>
               <td className="table-data__data table-data__data--big">
                 {tp.tiposEvento.titulo}
               </td>
               <td className="table-data__data table-data__data--big">
                 {dateFormateDbToView(tp.dataEvento)}
+              </td>
+
+              <td className="table-data__data table-data__data--little">
+                <Link to="/detalhes-evento">
+                  <img 
+                    src={viewDetails}
+                    className="table-data__icon"
+                  />
+                </Link>
               </td>
 
               <td className="table-data__data table-data__data--little">
@@ -71,13 +83,14 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
                   alt=""
                   onClick={(e) =>
                     // dá pra passar o obhjeto tp direto?
-                    fnUpdate({//showUpdateForma(??)
+                    fnUpdate({
+                      //showUpdateForma(??)
                       idEvento: tp.idEvento,
                       nomeEvento: tp.nomeEvento,
                       dataEvento: tp.dataEvento,
                       descricao: tp.descricao,
                       idInstituicao: tp.idInstituicao, //por enquanto chumbado
-                      idTipoEvento: tp.idTipoEvento
+                      idTipoEvento: tp.idTipoEvento,
                     })
                   }
                 />
