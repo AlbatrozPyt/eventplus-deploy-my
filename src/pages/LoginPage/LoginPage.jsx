@@ -72,7 +72,7 @@ const LoginPage = () => {
               id="login"
               name="login"
               required={true}
-              value={user.email}
+              // value={user.email}
               manipulationFunction={(e) => {
                 setUser({
                   ...user,
@@ -87,7 +87,7 @@ const LoginPage = () => {
               id="senha"
               name="senha"
               required={true}
-              value={user.senha}
+              // value={user.senha}
               manipulationFunction={(e) => {
                 setUser({
                   ...user,

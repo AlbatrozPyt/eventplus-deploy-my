@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import "./TableEv.css";
 // import editPen from "../../../assets/images/edit-pen.svg";
 import editPen from "../../../assets/images/edit-pen.svg";
@@ -15,7 +15,6 @@ import { Tooltip } from "react-tooltip";
 // import trashDelete from "../../../assets/images/trash-delete.svg";
 
 const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
-  // console.log(dados);
   return (
     <table className="table-data">
       <thead className="table-data__head">
@@ -45,6 +44,7 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
       </thead>
       <tbody>
         {dados.map((tp) => {
+
           return (
             <tr className="table-data__head-row" key={tp.idEvento}>
               <td className="table-data__data table-data__data--big">
@@ -67,7 +67,7 @@ const Table = ({ dados, fnDelete = null, fnUpdate = null }) => {
               </td>
 
               <td className="table-data__data table-data__data--little">
-                <Link to="/detalhes-evento">
+                <Link to="/detalhes-evento" state={tp}>
                   <img 
                     src={viewDetails}
                     className="table-data__icon"
