@@ -58,17 +58,6 @@ const EventosAlunoPage = () => {
         );
 
         setEventos(eventosMarcados);
-
-        // console.clear();
-
-        // console.log("TODOS OS EVENTOS");
-        // console.log(todosEventos.data);
-
-        // console.log("MEUS EVENTOS");
-        // console.log(meusEventos.data);
-
-        // console.log("EVENTOS MARCADOSSSS:");
-        // console.log(eventosMarcados);
       } catch (error) {
         //colocar o notification
         console.log("Erro na API");
@@ -253,11 +242,21 @@ const EventosAlunoPage = () => {
             defaultValue={tipoEvento}
             additionalClass="select-tp-evento"
           />
-          <Table
-            dados={eventos}
-            fnConnect={handleConnect}
-            fnShowModal={showHideModal}
-          />
+
+          {tipoEvento === "1" ? (
+            <Table
+              dados={eventos}
+              fnConnect={handleConnect}
+              fnShowModal={showHideModal}
+            />
+          ) : (
+            <Table
+              dados={eventos}
+              fnConnect={handleConnect}
+              fnShowModal={showHideModal}
+              view="no-view"
+            />
+          )}
         </Container>
       </MainContent>
       {/* SPINNER -Feito com position */}

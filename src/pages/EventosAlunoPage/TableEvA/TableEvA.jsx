@@ -3,7 +3,7 @@ import React from "react";
 import comentaryIcon from "../../../assets/images/comentary-icon.svg";
 import { dateFormateDbToView } from "../../../Utils/stringFunctions";
 import ToggleSwitch from "../../../components/Toggle/Toggle";
-import viewDetails from "../../../assets/images/olhinho-black.svg"
+import viewDetails from "../../../assets/images/olhinho-black.svg";
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
 // import { Tooltip } from "react-tooltip";
@@ -12,7 +12,12 @@ import "react-tooltip/dist/react-tooltip.css";
 import "./TableEvA.css";
 import { Link } from "react-router-dom";
 
-const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
+const Table = ({
+  dados,
+  fnConnect = null,
+  fnShowModal = null,
+  view = null,
+}) => {
   return (
     <table className="tbal-data">
       <thead className="tbal-data__head">
@@ -23,9 +28,11 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Data
           </th>
-          <th className="tbal-data__head-title tbal-data__head-title--big">
-            Ver
-          </th>
+          {view != "no-view" ? (
+            <th className="tbal-data__head-title tbal-data__head-title--big">
+              Ver
+            </th>
+          ) : null}
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Ações
           </th>
@@ -40,15 +47,16 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
-                {/* {e.dataEvento} */}
                 {dateFormateDbToView(e.dataEvento)}
               </td>
 
-              <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
-                <Link to="/detalhes-evento" state={e}>
-                  <img src={viewDetails} className="table-data__icon" />
-                </Link>
-              </td>
+              {view != "no-view" ? (
+                <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
+                  <Link to="/detalhes-evento" state={e}>
+                    <img src={viewDetails} className="table-data__icon" />
+                  </Link>
+                </td>
+              ) : null}
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* imagem do comentário - abre o modal */}
