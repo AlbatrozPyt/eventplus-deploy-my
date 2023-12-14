@@ -1,13 +1,16 @@
 import React from "react";
+
 import comentaryIcon from "../../../assets/images/comentary-icon.svg";
 import { dateFormateDbToView } from "../../../Utils/stringFunctions";
 import ToggleSwitch from "../../../components/Toggle/Toggle";
+import viewDetails from "../../../assets/images/olhinho-black.svg"
 // importa a biblioteca de tootips ()
 import "react-tooltip/dist/react-tooltip.css";
 // import { Tooltip } from "react-tooltip";
 
 // import trashDelete from "../../../assets/images/trash-delete.svg";
 import "./TableEvA.css";
+import { Link } from "react-router-dom";
 
 const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
   return (
@@ -19,6 +22,9 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
           </th>
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Data
+          </th>
+          <th className="tbal-data__head-title tbal-data__head-title--big">
+            Ver
           </th>
           <th className="tbal-data__head-title tbal-data__head-title--big">
             Ações
@@ -36,6 +42,12 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* {e.dataEvento} */}
                 {dateFormateDbToView(e.dataEvento)}
+              </td>
+
+              <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
+                <Link to="/detalhes-evento" state={e}>
+                  <img src={viewDetails} className="table-data__icon" />
+                </Link>
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">

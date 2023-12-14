@@ -1,3 +1,11 @@
+.back-arrow {
+  width: 45px;
+  height: 45px;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+
 .events-box {
   display: flex;
   flex-direction: column;
@@ -7,7 +15,36 @@
   /* padding: 40px 0 20px 0; */
 }
 
-/* --color-blue-red: #511948; */
+.detalhes-evento {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 300px;
+  margin-bottom: 50px;
+}
+
+.detalhes {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.comentarios-evento {
+  background-color: #b51d44;
+  height: 500px;
+}
+
+.comentarios {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-around;
+}
 
 @media screen and (min-width: 992px) {
   .events-box {
