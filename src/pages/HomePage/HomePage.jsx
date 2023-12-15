@@ -7,14 +7,15 @@ import VisionSection from "../../components/VisionSection/VisionSection";
 import ContactSection from "../../components/ContactSection/ContactSection";
 import Title from "../../components/Title/Title";
 import NextEvent from "../../components/NextEvent/NextEvent";
+import PastEvent from "../../components/PastEvent/PastEvent";
 import Container from "../../components/Container/Container";
 import api from "../../Services/Service";
 import Notification from "../../components/Notification/Notification";
-import { nextEventResource } from "../../Services/Service";
-
+import { nextEventResource, eventsResource } from "../../Services/Service";
 
 const HomePage = () => {
   const [nextEvents, setNextEvents] = useState([]);
+  const [events, setEvents] = useState([]);
   const [notifyUser, setNotifyUser] = useState(); //Componente Notification
 
   // roda somente na inicialização do componente
@@ -22,20 +23,15 @@ const HomePage = () => {
     async function getNextEvents() {
       try {
         const promise = await api.get(nextEventResource);
+        const promiseGet = await api.get(eventsResource);
         const dados = await promise.data;
-        // console.log(dados);
+        const dadosEventos = await promiseGet.data;
         setNextEvents(dados); //atualiza o state
-
+        setEvents(dadosEventos); // get eventos
+        console.log("Events");
+        console.log(events);
       } catch (error) {
         console.log("não trouxe os próximos eventos, verifique lá!");
-        // setNotifyUser({
-        //   titleNote: "Erro",
-        //   textNote: `Não foi possível carregar os próximos eventos. Verifique a sua conexão com a internet`,
-        //   imgIcon: "danger",
-        //   imgAlt:
-        //   "Imagem de ilustração de erro. Rapaz segurando um balão com símbolo x.",
-        //   showMessage: true,
-        // });
       }
     }
 
@@ -43,7 +39,6 @@ const HomePage = () => {
   }, []);
 
   return (
-    
     <MainContent>
       {<Notification {...notifyUser} setNotifyUser={setNotifyUser} />}
       <Banner />
@@ -54,6 +49,7 @@ const HomePage = () => {
           {/* <Title titleText={"Próximos Eventos"} /> */}
 
           <div className="events-box">
+            <Title titleText={"Próximos Eventos"} />
             {nextEvents.map((e) => {
               return (
                 <NextEvent
@@ -64,6 +60,27 @@ const HomePage = () => {
                   idEvent={e.idEvento}
                 />
               );
+            })}
+          </div>
+
+          <div className="events-box">
+            <Title titleText={"Eventos Passados"} />
+
+            {events.map((e) => {
+              console.log(new Date(e.dataEvento).toLocaleDateString());
+              console.log(new Date().toLocaleDateString());
+              if (
+                new Date(e.dataEvento).toLocaleDateString() >
+                new Date().toLocaleDateString()
+              ) {
+                return (
+                  <PastEvent
+                    title={e.nomeEvento}
+                    description={e.descricao}
+                    eventDate={e.dataEvento}
+                  />
+                );
+              }
             })}
           </div>
         </Container>
